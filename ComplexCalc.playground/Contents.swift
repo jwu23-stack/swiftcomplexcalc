@@ -3,13 +3,97 @@ print("Welcome back to the UW Calculator")
 // Your job is to fill out Calculator so all the expressions
 // below both compile and return "true"
 class Calculator {
+    func add(lhs: Int, rhs: Int) -> Int {
+        return lhs + rhs
+    }
     
+    func subtract(lhs: Int, rhs: Int) -> Int {
+        return lhs - rhs
+    }
+    
+    func multiply(lhs: Int, rhs: Int) -> Int {
+        return lhs * rhs
+    }
+    
+    func divide(lhs: Int, rhs: Int) -> Int {
+        return lhs / rhs
+    }
+    
+    func mathOp(lhs: Int, rhs: Int, op: (Int, Int) -> Int) -> Int {
+        return op(lhs, rhs)
+    }
+    
+    func add(_ array: [Int]) -> Int {
+        var total : Int = 0
+        for num in array {
+            total += num
+        }
+        return total
+    }
+    
+    func multiply(_ array: [Int]) -> Int {
+        var total : Int = 1
+        for num in array {
+            total *= num
+        }
+        return total
+    }
+    
+    func count(_ array: [Int]) -> Int {
+        return array.count
+    }
+    
+    func avg(_ array: [Int]) -> Int {
+        var total : Int = 0
+        for num in array {
+            total += num
+        }
+        return total / array.count
+    }
+    
+    func mathOp(args: [Int], beg: Int, op: (Int, Int) -> Int) -> Int {
+        var total : Int = beg
+        for num in args {
+            total = op(total, num)
+        }
+        return total
+    }
+    
+    func add(lhs: (Int, Int), rhs: (Int, Int)) -> (Int, Int) {
+        let (x1, y1) = lhs
+        let (x2, y2) = rhs
+        return (x1 + x2, y1 + y2)
+    }
+    
+    func subtract(lhs: (Int, Int), rhs: (Int, Int)) -> (Int, Int) {
+        let (x1, y1) = lhs
+        let (x2, y2) = rhs
+        return (x1 - x2, y1 - y2)
+    }
+    
+    func add(lhs: Dictionary<String, Int>, rhs: Dictionary<String, Int>) -> Dictionary<String, Int> {
+        var result : [String: Int] = [:]
+        result["x"] = (lhs["x"] ?? 0) + (rhs["x"] ?? 0)
+        result["y"] = (lhs["y"] ?? 0) + (rhs["y"] ?? 0)
+        return result
+    }
+    
+    func subtract(lhs: Dictionary<String, Int>, rhs: Dictionary<String, Int>) -> Dictionary<String, Int> {
+        var result : [String: Int] = [:]
+        result["x"] = (lhs["x"] ?? 0) - (rhs["x"] ?? 0)
+        result["y"] = (lhs["y"] ?? 0) - (rhs["y"] ?? 0)
+        return result
+    }
 }
 
 let calc = Calculator()  // Don't change this declaration name; it's used in all the tests below
 
 // ====> Add your own tests here if you wish <====
-
+//print(calc.mathOp(args: [1, 2, 3], beg: 2, op: { $0 + $1 }) == 8) // Initial: 2 --> 2 + 1 + 2 + 3 = 8
+//print(calc.mathOp(args: [1, 2], beg: 2, op: { $0 * $1 }) == 4) // Initial: 2 --> 2 * 2 = 4
+//print(calc.mathOp(args: [1, 2, 3], beg: 0, op: { $0 + $1 }) == 6)
+//print(calc.mathOp(args: [1, 2, 3, 4, 5], beg: 0, op: { $0 + $1 }) == 15)
+//print(calc.mathOp(args: [1, 1, 1, 1, 1], beg: 1, op: { $0 * $1 }) == 1)
 
 // ====> Do not modify code in this section <====
 calc.add(lhs: 2, rhs: 2) == 4
@@ -17,7 +101,7 @@ calc.subtract(lhs: 2, rhs: 2) == 0
 calc.multiply(lhs: 2, rhs: 2) == 4
 calc.divide(lhs: 2, rhs: 2) == 1
 
-calc.mathOp(lhs: 5, rhs: 5, op: { (lhs: Int, rhs: Int) -> Int in (lhs + rjs) + (lhs * rhs) }) == 35
+calc.mathOp(lhs: 5, rhs: 5, op: { (lhs: Int, rhs: Int) -> Int in (lhs + rhs) + (lhs * rhs) }) == 35
     // This style is one way of writing an anonymous function
 calc.mathOp(lhs: 10, rhs: -5, op: { ($0 + $1) + ($0 - $1) }) == 20
     // This is the second, more terse, style; either works
